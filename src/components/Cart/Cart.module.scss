@@ -1,0 +1,48 @@
+.cart_table {
+  margin: 30px auto;
+  border-collapse: collapse;
+  thead th {
+    background-color: #f2f2f3;
+    border: solid 1px #ccc;
+  }
+  th {
+    padding: 10px 20px;
+  }
+  td {
+    padding: 10px 20px;
+    border: solid 1px #ccc;
+  }
+  .quantity {
+    margin: 0 15px;
+  }
+  @media screen and (max-width: 1023px) {
+    font-size: 1.2rem;
+    td,
+    th,
+    .btn {
+      padding: 5px;
+    }
+    .col_quantity {
+      white-space: nowrap;
+    }
+    .quantity {
+      margin: 0 5px;
+    }
+    .btn_delete {
+      font-size: 1.2rem;
+    }
+  }
+  .col_title {
+    text-align: left;
+  }
+  .col_price {
+    text-align: right;
+    font-weight: bold;
+  }
+  .reduction {
+    color: red;
+  }
+}
+.cart_empty {
+  margin-top: 30px;
+}

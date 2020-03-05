@@ -1,0 +1,37 @@
+.nav {
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  right: 0;
+  padding: 20px 30px;
+  background-color: #20232a;
+  font-size: 1.8rem;
+  color: #fff;
+}
+.nav_list {
+  display: flex;
+  justify-content: center;
+}
+.nav_link {
+  margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+  &:hover,
+  &.active {
+    color: #61dafb;
+  }
+}
+.badge {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  line-height: 22px;
+  border: solid 1px #61dafb;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  color: #61dafb;
+  position: absolute;
+  margin: -10px 0 0 4px;
+}
