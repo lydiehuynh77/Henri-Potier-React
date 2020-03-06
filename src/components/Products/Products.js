@@ -104,7 +104,7 @@ export default function Products() {
           value={search}
         />
       </form>
-      {isLoading || !filteredProducts ? (
+      {isLoading ? (
         <div className={styles.loader}></div>
       ) : (
         <ul className={styles.products_list}>
