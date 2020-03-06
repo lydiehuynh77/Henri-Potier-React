@@ -27,43 +27,35 @@ export default function Products() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   setFilteredProducts(
-  //     products.filter(
-  //       product =>
-  //         product.isbn.includes(search) ||
-  //         product.title.toLowerCase().includes(search.toLowerCase()) ||
-  //         product.synopsis.filter(synopsis =>
-  //           synopsis.toLowerCase().includes(search.toLowerCase())
-  //         ).length > 0
-  //     )
-  //   );
-  // }, [search, products]);
+  useEffect(() => {
+    let searchWords = search.toLowerCase().split(' ');
+    if (searchWords[searchWords.length - 1] === '') {
+      searchWords.splice(searchWords.length - 1, 1);
+    }
+    let searchExp = new RegExp('(' + searchWords.join(')|(') + ')', 'gi');
 
-  const handleSubmit = useCallback(
-    event => {
-      event.preventDefault();
-      let searchWords = search.toLowerCase().split(' ');
-      let searchExp = new RegExp('(' + searchWords.join(')|(') + ')', 'gi');
+    setFilteredProducts(
+      products.filter(
+        product =>
+          product.isbn.includes(search) ||
+          (product.title.toLowerCase().match(searchExp) &&
+            product.title.toLowerCase().match(searchExp).length ===
+              searchWords.length) ||
+          (product.synopsis
+            .join(' ')
+            .toLowerCase()
+            .match(searchExp) &&
+            product.synopsis
+              .join('|')
+              .toLowerCase()
+              .match(searchExp).length === searchWords.length)
+      )
+    );
+  }, [search, products]);
 
-      setFilteredProducts(
-        products.filter(
-          product =>
-            product.isbn.includes(search) ||
-            (product.title.toLowerCase().match(searchExp) &&
-              product.title.toLowerCase().match(searchExp).length ===
-                searchWords.length) ||
-            product.synopsis.filter(
-              item =>
-                item.toLowerCase().match(searchExp) &&
-                item.toLowerCase().match(searchExp).length ===
-                  searchWords.length
-            ).length > 0
-        )
-      );
-    },
-    [products, search]
-  );
+  const handleSubmit = useCallback(event => {
+    event.preventDefault();
+  }, []);
 
   useEffect(() => {
     setFilteredProducts(products);
@@ -111,9 +103,6 @@ export default function Products() {
           }}
           value={search}
         />
-        <button className={styles.btn_search} type='submit'>
-          Chercher
-        </button>
       </form>
       {isLoading || !filteredProducts ? (
         <div className={styles.loader}></div>
